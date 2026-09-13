@@ -1,11 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import get_template
-from django.db.models import Sum
+from django.db.models import Count, Sum
 from .models import Categoria, Evento, Inscripcion, Puntuacion
 
 def eventos(request):
     return render(request, 'competencia/eventos.html', {'eventos': Evento.objects.order_by('-fecha_inicio')})
+
+
+def reportes(request):
+    categorias = Categoria.objects.annotate(total_inscripciones=Count('inscripciones')).order_by('modalidad', 'nombre')
+    return render(request, 'competencia/reportes.html', {'categorias': categorias})
 
 def reporte_categoria(request, categoria_id):
     categoria = get_object_or_404(Categoria, pk=categoria_id)
