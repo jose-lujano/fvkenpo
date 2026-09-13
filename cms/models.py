@@ -4,7 +4,7 @@ from django.db import models
 hex_color = RegexValidator(r'^#[0-9A-Fa-f]{6}$', 'Use un color HEX válido, por ejemplo #003366.')
 
 class SiteSetting(models.Model):
-    sitio_nombre = models.CharField(max_length=180, default='Federación Venezolana de Kenpo')
+    sitio_nombre = models.CharField(max_length=180, default='TORNEOS NACIONALES ABIERTOS DE ARTES MARCIALES')
     logo = models.ImageField(upload_to='config/', blank=True, null=True)
     fondo_pantalla = models.ImageField(upload_to='config/', blank=True, null=True)
     color_primario_start = models.CharField(max_length=7, default='#003366', validators=[hex_color])
