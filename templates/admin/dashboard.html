@@ -1,0 +1,20 @@
+{% extends 'admin/base_site.html' %}
+{% block title %}Dashboard FVK{% endblock %}
+{% block branding %}<h1 id="site-name"><a href="{% url 'admin:index' %}">Administración FVK</a></h1>{% endblock %}
+{% block content %}
+<div id="content-main">
+  <h2>Resumen de contacto</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0 28px;">
+    <div style="background:#003366;color:#fff;padding:22px;border-radius:8px;"><div style="font-size:14px;opacity:.8;">Total de mensajes</div><strong style="font-size:38px;">{{ total_mensajes }}</strong></div>
+    <div style="background:#b42318;color:#fff;padding:22px;border-radius:8px;"><div style="font-size:14px;opacity:.8;">No leídos</div><strong style="font-size:38px;">{{ mensajes_no_leidos }}</strong></div>
+  </div>
+  <div class="module">
+    <table style="width:100%;">
+      <caption><a href="{% url 'admin:cms_contactmessage_changelist' %}" class="section">Mensajes recientes</a></caption>
+      <thead><tr><th>Remitente</th><th>Asunto</th><th>Fecha</th><th>Estado</th></tr></thead>
+      <tbody>{% for mensaje in mensajes_recientes %}<tr><td><a href="{% url 'admin:cms_contactmessage_change' mensaje.id %}">{{ mensaje.nombre }}</a></td><td>{{ mensaje.asunto }}</td><td>{{ mensaje.creado|date:'d/m/Y H:i' }}</td><td>{% if mensaje.atendido %}Leído{% else %}<strong style="color:#b42318;">No leído</strong>{% endif %}</td></tr>{% empty %}<tr><td colspan="4">No hay mensajes recibidos.</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  <p style="margin-top:20px;"><a class="button" href="{% url 'admin:cms_contactmessage_changelist' %}">Abrir bandeja de mensajes</a></p>
+</div>
+{% endblock %}
