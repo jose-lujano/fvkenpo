@@ -7,8 +7,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-fvk-dev-key-change-
 
 DEBUG = os.getenv('DJANGO_DEBUG', '1') == '1'
 
-# Permite el dominio de Alwaysdata y localhost
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'fvkenpo.alwaysdata.net,localhost,127.0.0.1').split(',')
+# Permite el dominio de Alwaysdata, el www y localhost
+allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS', '.alwaysdata.net,localhost,127.0.0.1,testserver')
+ALLOWED_HOSTS = [host.strip() for host in allowed_hosts.split(',') if host.strip()]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,6 +76,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = []
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -84,7 +86,11 @@ LOGIN_URL = '/admin/login/'
 
 # Configuración de proxy SSL para Alwaysdata
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_TRUSTED_ORIGINS = ['https://fvkenpo.alwaysdata.net']
+trusted_origins = os.getenv(
+    'CSRF_TRUSTED_ORIGINS',
+    'https://fvkenpo.alwaysdata.net,https://www.fvkenpo.alwaysdata.net,http://localhost:8000,http://127.0.0.1:8000',
+)
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in trusted_origins.split(',') if origin.strip()]
 
 # Email de contacto
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')

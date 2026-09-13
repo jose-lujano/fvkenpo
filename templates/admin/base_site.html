@@ -1,4 +1,17 @@
 {% extends 'admin/base.html' %}
+{% load static %}
+
 {% block title %}{{ title }} | Administración FVK{% endblock %}
-{% block branding %}<h1 id="site-name"><a href="{% url 'admin:index' %}">Administración FVK</a></h1>{% endblock %}
-{% block nav-global %}<a href="{% url 'admin_dashboard' %}" style="margin-right:18px;">Dashboard de mensajes</a>{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin_fvk.css' %}">
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Administración FVK</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+<a href="{% url 'admin_dashboard' %}">Dashboard de mensajes</a>
+{% endblock %}
