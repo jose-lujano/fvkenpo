@@ -1,17 +1,23 @@
 /* Estilo visual del módulo admin FVK */
 :root {
-  --fvk-admin-bg: #edf4ff;
+  --fvk-admin-bg: #edf5ff;
   --fvk-admin-panel: #ffffff;
-  --fvk-admin-header-start: #0d3f7a;
-  --fvk-admin-header-end: #1d77d6;
+  --fvk-admin-surface: #f5f9ff;
+  --fvk-admin-header-start: #0d2d4a;
+  --fvk-admin-header-end: #1b5d9c;
+  --fvk-admin-primary: #0c4a7a;
+  --fvk-admin-primary-soft: #dfeeff;
   --fvk-admin-accent: #0b5fd2;
-  --fvk-admin-accent-soft: #eaf3ff;
-  --fvk-admin-text: #16283d;
-  --fvk-admin-muted: #5b6f86;
-  --fvk-admin-border: #dfeaf7;
-  --fvk-admin-shadow: rgba(10, 31, 60, 0.12);
-  --fvk-admin-danger: #d64545;
+  --fvk-admin-text: #17324a;
+  --fvk-admin-text-strong: #0d2238;
+  --fvk-admin-muted: #586f85;
+  --fvk-admin-border: #d8e5f3;
+  --fvk-admin-shadow: rgba(10, 31, 60, 0.14);
+  --fvk-admin-danger: #b53636;
+  --fvk-admin-warning: #b76f12;
   --fvk-admin-success: #1e7f5a;
+  --fvk-admin-white: #ffffff;
+  --fvk-admin-link: #114f90;
 }
 
 body {
@@ -31,7 +37,7 @@ body {
 #user-tools a,
 #nav-global a,
 #nav-sidebar a {
-  color: #fff !important;
+  color: var(--fvk-admin-white) !important;
   text-decoration: none !important;
 }
 
@@ -39,6 +45,7 @@ body {
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.04em;
+  color: var(--fvk-admin-white) !important;
 }
 
 #user-tools {
@@ -55,11 +62,33 @@ body {
 
 #nav-global a {
   background: rgba(255,255,255,0.09);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 999px;
   padding: 0.38rem 0.8rem;
   font-size: 12px;
   font-weight: 700;
+  color: var(--fvk-admin-white) !important;
+}
+
+#nav-sidebar {
+  background: var(--fvk-admin-primary-soft) !important;
+  border-right: 1px solid var(--fvk-admin-border);
+}
+
+#nav-sidebar .module,
+#nav-sidebar .module h2,
+#nav-sidebar a,
+#nav-sidebar .app-list a,
+#nav-sidebar .model-index a {
+  color: var(--fvk-admin-text-strong) !important;
+  background: transparent;
+}
+
+#nav-sidebar .module {
+  background: rgba(255,255,255,0.28);
+  border: 1px solid var(--fvk-admin-border);
+  border-radius: 12px;
+  padding: 10px 12px;
 }
 
 #container,
@@ -104,12 +133,13 @@ body {
   border-bottom: 1px solid var(--fvk-admin-border);
   border-radius: 12px 12px 0 0;
   padding: 12px 14px;
+  color: var(--fvk-admin-text-strong) !important;
 }
 
 .module th {
-  background: #f8fafc;
+  background: #f3f8ff;
   border-bottom: 1px solid var(--fvk-admin-border);
-  color: var(--fvk-admin-text);
+  color: var(--fvk-admin-text-strong);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -130,7 +160,7 @@ body {
 .list-filter a,
 .tabular a,
 .inline-related a {
-  color: var(--fvk-admin-accent);
+  color: var(--fvk-admin-link);
   text-decoration: none;
 }
 
@@ -142,7 +172,7 @@ button,
   background: linear-gradient(135deg, var(--fvk-admin-header-start), var(--fvk-admin-header-end)) !important;
   border: none !important;
   border-radius: 12px !important;
-  color: #fff !important;
+  color: var(--fvk-admin-white) !important;
   font-weight: 700 !important;
   padding: 0.72rem 1.05rem !important;
   box-shadow: 0 10px 18px rgba(13, 63, 122, 0.18);
@@ -217,31 +247,33 @@ body.login .submit-row {
 }
 
 .metric-card {
-  background: linear-gradient(135deg, var(--fvk-admin-header-start), var(--fvk-admin-header-end));
-  color: #fff;
+  background: linear-gradient(135deg, #0d3159, #1a5da0);
+  color: var(--fvk-admin-white);
   border-radius: 16px;
   padding: 22px 20px;
-  box-shadow: 0 12px 22px rgba(13, 63, 122, 0.18);
+  box-shadow: 0 12px 22px rgba(13, 63, 122, 0.2);
 }
 
 .metric-card.secondary {
-  background: linear-gradient(135deg, #0d4b83, #1784e8);
+  background: linear-gradient(135deg, #0f456d, #1a78d3);
 }
 
 .metric-card .label {
   font-size: 13px;
-  opacity: 0.88;
+  opacity: 0.92;
   margin-bottom: 8px;
+  color: rgba(255,255,255,0.92);
 }
 
 .metric-card strong {
   font-size: 2.3rem;
   display: inline-block;
   line-height: 1;
+  color: var(--fvk-admin-white);
 }
 
 .metric-card.warning {
-  background: linear-gradient(135deg, #b23a3a, #d05a5a);
+  background: linear-gradient(135deg, #a54343, #d2714d);
 }
 
 /* Mensaje table */
@@ -257,6 +289,16 @@ body.login .submit-row {
 
 .dashboard-table tbody tr:hover {
   background: #f7fbff;
+}
+
+.status-read {
+  color: var(--fvk-admin-success);
+  font-weight: 700;
+}
+
+.status-unread {
+  color: var(--fvk-admin-warning);
+  font-weight: 700;
 }
 
 .status-read {
